@@ -53,7 +53,7 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot v2"}
 )
 def purge(ctx, amount: int):
     "Deletes up to 100 messages."
-    if not ((ctx.author.permissions & (1 << 16)) and (ctx.author.permissions & (1 << 13))):
+    if not ctx.author.permissions & (1 << 16 + 1 << 13):
         return Message("You do not have the right permissions to perform this action.", ephemeral=True)
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
     messages_request = requests.get(
