@@ -1,0 +1,12 @@
+# binaries
+__pycache__
+
+# sensitive files
+.env
+deployTest.sh
+
+# log and temp files
+*.swp
+
+# virtual environment
+venv/

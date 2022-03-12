@@ -1,0 +1,10 @@
+[Unit]
+Description=Purge discord bot
+
+[Service]
+User=USER
+WorkingDirectory=WORKINGDIRECTORY
+ExecStart=WORKINGDIRECTORY/venv/bin/python3 -m gunicorn bot:app -b 127.0.0.1:9100
+
+[Install]
+WantedBy=multi-user.target
