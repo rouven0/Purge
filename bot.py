@@ -43,8 +43,8 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot v2"}
     options=[
         {
             "name": "amount",
-            "description": "The amount of messages you want to delete (2-100).",
-            "min_value": 2,
+            "description": "The amount of messages you want to delete (1-100).",
+            "min_value": 1,
             "max_value": 100,
             "type": CommandOptionType.INTEGER,
             "required": True,
@@ -52,7 +52,7 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot v2"}
     ]
 )
 def purge(ctx, amount: int):
-    "Deletes up to 100 messages."
+    "Deletes up to 100 messages that are not older than 2 weeks."
     if not ((ctx.author.permissions & (1 << 16)) and (ctx.author.permissions & (1 << 13))):
         return Message("You do not have the right permissions to perform this action.", ephemeral=True)
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
@@ -76,6 +76,20 @@ def purge(ctx, amount: int):
         delete_request = requests.post(
             url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
             json={"messages": messages_to_delete},
+            headers=headers,
+        )
+        if delete_request.status_code == 403:
+            return Message(
+                content=(
+                    "Hey there, the bot is missing permissions to perform this action. Please make sure "
+                    "<@941041925216157746> has the permission to manage messages."
+                ),
+                ephemeral=True,
+            )
+        delete_request.raise_for_status()
+    elif len(messages_to_delete) == 1:
+        delete_request = requests.delete(
+            url=base_url + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
             headers=headers,
         )
         if delete_request.status_code == 403:
