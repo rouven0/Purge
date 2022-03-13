@@ -72,21 +72,21 @@ def purge(ctx, amount: int):
     for record in messages_request.json():
         if int(record["id"]) > minimum_time:
             messages_to_delete.append(record["id"])
-    print(messages_to_delete)
-    delete_request = requests.post(
-        url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
-        json={"messages": messages_to_delete},
-        headers=headers,
-    )
-    if delete_request.status_code == 403:
-        return Message(
-            content=(
-                "Hey there, the bot is missing permissions to perform this action. Please make sure "
-                "<@941041925216157746> has the permission to manage messages."
-            ),
-            ephemeral=True,
+    if len(messages_to_delete) > 1:
+        delete_request = requests.post(
+            url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
+            json={"messages": messages_to_delete},
+            headers=headers,
         )
-    delete_request.raise_for_status()
+        if delete_request.status_code == 403:
+            return Message(
+                content=(
+                    "Hey there, the bot is missing permissions to perform this action. Please make sure "
+                    "<@941041925216157746> has the permission to manage messages."
+                ),
+                ephemeral=True,
+            )
+        delete_request.raise_for_status()
 
     return Message(f"Deleted {len(messages_to_delete)} messages.", ephemeral=True)
 
