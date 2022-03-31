@@ -36,7 +36,7 @@ console_handler.setFormatter(logging.Formatter(config.LOG_FORMAT))
 logger.addHandler(console_handler)
 
 base_url = "https://discord.com/api/v10/channels/"
-headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot v2"}
+headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
 
 
 @discord.command(
