@@ -1,5 +1,6 @@
 [Unit]
 Description=Purge discord bot
+After=network-online.target
 
 [Service]
 User=USER

@@ -9,10 +9,12 @@ install:
 	@sed -i 's|USER|'$(USER)'|g' Purge.service
 	@sudo cp ./Purge.service /etc/systemd/system
 	@sudo systemctl daemon-reload
+	@sudo systemctl enable Purge.service
 	@echo Done. The service is ready to be started
 
 uninstall:
 	@echo Removing systemd service...
+	@sudo systemctl disable Purge.service
 	@sed -i 's|'$(PWD)'|WORKINGDIRECTORY|g' Purge.service
 	@sed -i 's|'$(USER)'|USER|g' Purge.service
 	@sudo rm /etc/systemd/system/Purge.service
