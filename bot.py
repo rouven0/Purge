@@ -102,7 +102,6 @@ def purge(ctx, amount: int):
             )
         delete_request.raise_for_status()
 
-    logging.info("Purge command ran by %s, with amount %d", ctx.author.username, amount)
     return Message(f"Deleted {len(messages_to_delete)} messages.", ephemeral=True)
 
 

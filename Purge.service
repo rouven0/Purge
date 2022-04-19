@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 User=USER
 WorkingDirectory=WORKINGDIRECTORY
-ExecStart=WORKINGDIRECTORY/venv/bin/python3 -m gunicorn bot:app -b 127.0.0.1:9100
+ExecStart=WORKINGDIRECTORY/venv/bin/python3 -m gunicorn bot:app -b 127.0.0.1:9100 -w 4
 
 [Install]
 WantedBy=multi-user.target
