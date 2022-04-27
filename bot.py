@@ -57,7 +57,7 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
         },
     ]
 )
-def purge(ctx, amount: int, until: str = None):
+def purge(ctx, amount: int, until: str = "0"):
     "Deletes up to 100 messages that are not older than 2 weeks."
     m = re.match(r"https://discord.com/channels/\d*/\d*/(\d*)", until)
     if m:
