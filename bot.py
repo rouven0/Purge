@@ -3,6 +3,7 @@ import sys
 from os import getenv
 import logging
 from time import time
+import re
 from flask_discord_interactions.models.message import Message
 import requests
 
@@ -48,11 +49,19 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
             "max_value": 100,
             "type": CommandOptionType.INTEGER,
             "required": True,
-        }
+        },
+        {
+            "name": "until",
+            "description": "[Message link or id] Last message to be deleted (if reached).",
+            "type": CommandOptionType.STRING,
+        },
     ]
 )
-def purge(ctx, amount: int):
+def purge(ctx, amount: int, until: str = None):
     "Deletes up to 100 messages that are not older than 2 weeks."
+    m = re.match(r"https://discord.com/channels/\d*/\d*/(\d*)", until)
+    if m:
+        until = m.groups()[0]
     if not ((ctx.author.permissions & (1 << 16)) and (ctx.author.permissions & (1 << 13))):
         return Message("You do not have the right permissions to perform this action.", ephemeral=True)
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
@@ -72,6 +81,8 @@ def purge(ctx, amount: int):
     for record in messages_request.json():
         if int(record["id"]) > minimum_time:
             messages_to_delete.append(record["id"])
+        if record["id"] == until:
+            break
     if len(messages_to_delete) > 1:
         delete_request = requests.post(
             url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
