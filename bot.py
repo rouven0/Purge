@@ -64,8 +64,6 @@ def purge(ctx, amount: int, until: str = "0"):
     m = re.match(r"https://discord.com/channels/\d*/\d*/(\d*)", until)
     if m:
         until = m.groups()[0]
-    if not ((ctx.author.permissions & (1 << 16)) and (ctx.author.permissions & (1 << 13))):
-        return Message("You do not have the right permissions to perform this action.", ephemeral=True)
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
     messages_request = requests.get(
         url=base_url + str(ctx.channel_id) + "/messages?limit=" + str(amount), headers=headers
