@@ -4,7 +4,6 @@ from os import getenv
 import logging
 from time import time
 import re
-from flask_discord_interactions.models.message import Message
 import requests
 
 from dotenv import load_dotenv
@@ -12,7 +11,8 @@ from flask_discord_interactions import DiscordInteractions
 
 
 from flask import Flask
-from flask_discord_interactions.models.option import CommandOptionType
+from flask_discord_interactions.models.option import Option, CommandOptionType
+from flask_discord_interactions.models.message import Message
 
 import config
 
@@ -41,21 +41,23 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
 
 
 @discord.command(
+    default_member_permissions="73728",
+    dm_permission=False,
     options=[
-        {
-            "name": "amount",
-            "description": "The amount of messages you want to delete (1-100).",
-            "min_value": 1,
-            "max_value": 100,
-            "type": CommandOptionType.INTEGER,
-            "required": True,
-        },
-        {
-            "name": "until",
-            "description": "[Message link or id] Last message to be deleted (if reached).",
-            "type": CommandOptionType.STRING,
-        },
-    ]
+        Option(
+            name="amount",
+            description="The amount of messages you want to delete (1-100).",
+            type=CommandOptionType.INTEGER,
+            required=True,
+            min_value=1,
+            max_value=100,
+        ),
+        Option(
+            name="until",
+            description="[Message link or id] The last message to be deleted (if reached).",
+            type=CommandOptionType.STRING,
+        ),
+    ],
 )
 def purge(ctx, amount: int, until: str = "0"):
     "Deletes up to 100 messages that are not older than 2 weeks."
