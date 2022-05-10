@@ -6,7 +6,6 @@ from time import time
 import re
 import requests
 
-from dotenv import load_dotenv
 from flask_discord_interactions import DiscordInteractions
 
 
@@ -14,9 +13,6 @@ from flask import Flask
 from flask_discord_interactions.models.option import Option, CommandOptionType
 from flask_discord_interactions.models.message import Message
 
-import config
-
-load_dotenv("./.env")
 
 app = Flask(__name__)
 discord = DiscordInteractions(app)
@@ -33,7 +29,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 console_handler = logging.StreamHandler()
-console_handler.setFormatter(logging.Formatter(config.LOG_FORMAT))
+console_handler.setFormatter(logging.Formatter("%(levelname)s [%(module)s.%(funcName)s]: %(message)s"))
 logger.addHandler(console_handler)
 
 base_url = "https://discord.com/api/v10/channels/"
