@@ -57,7 +57,14 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
 )
 def purge(ctx, amount: int, until: str = "0"):
     "Deletes up to 100 messages that are not older than 2 weeks."
-    logging.info("%s#%s used /purge in guild %s", ctx.author.username, ctx.author.discriminator, ctx.guild_id)
+    logging.info(
+        "%s#%s used /purge in guild %s. amount: %s until: %s",
+        ctx.author.username,
+        ctx.author.discriminator,
+        ctx.guild_id,
+        amount,
+        until,
+    )
     m = re.match(r"https://discord.com/channels/\d*/\d*/(\d*)", until)
     if m:
         until = m.groups()[0]
