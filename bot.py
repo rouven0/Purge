@@ -1,18 +1,15 @@
 # pylint: disable=unused-argument
+import logging
+import re
 import sys
 from os import getenv
-import logging
 from time import time
-import re
+
 import requests
-
-from flask_discord_interactions import DiscordInteractions
-
-
 from flask import Flask
-from flask_discord_interactions.models.option import Option, CommandOptionType
+from flask_discord_interactions import DiscordInteractions
 from flask_discord_interactions.models.message import Message
-
+from flask_discord_interactions.models.option import CommandOptionType, Option
 
 app = Flask(__name__)
 discord = DiscordInteractions(app)
