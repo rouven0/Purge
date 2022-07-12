@@ -49,6 +49,8 @@ headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0"}
             name="until",
             description="[Message link or id] The last message to be deleted (if reached).",
             type=CommandOptionType.STRING,
+            min_length=18,
+            max_length=95,
         ),
     ],
 )
@@ -62,6 +64,29 @@ def purge(ctx, amount: int, until: str = "0"):
         amount,
         until,
     )
+
+    def has_permission_indicator(num: int) -> str:
+        """
+        Returns an indicator for the given permission
+        """
+        return "✅" if int(ctx.app_permissions) & (1 << num) else "🚫"
+
+    if not all(
+        [
+            int(ctx.app_permissions) & (1 << 16),
+            int(ctx.app_permissions) & (1 << 13),
+            int(ctx.app_permissions) & (1 << 10),
+        ]
+    ):
+        return Message(
+            content=(
+                "Hey there, <@941041925216157746> needs the following permissions in this channel in order to work. "
+                "The indicators show whether you have already granted that permission or not.\n"
+                f"{has_permission_indicator(10)} View this channel\n{has_permission_indicator(16)} "
+                f"Read message history\n{has_permission_indicator(13)} Manage Messages"
+            ),
+            ephemeral=True,
+        )
     m = re.match(r"https://discord.com/channels/\d*/\d*/(\d*)", until)
     if m:
         until = m.groups()[0]
@@ -69,15 +94,6 @@ def purge(ctx, amount: int, until: str = "0"):
     messages_request = requests.get(
         url=base_url + str(ctx.channel_id) + "/messages?limit=" + str(amount), headers=headers
     )
-    if messages_request.status_code == 403:
-        return Message(
-            content=(
-                "Hey there, the bot is missing permissions to perform this action. Please make sure "
-                "<@941041925216157746> has the permission to:\n - View this channel\n - Read message history."
-            ),
-            ephemeral=True,
-        )
-    messages_request.raise_for_status()
     messages_to_delete = []
     for record in messages_request.json():
         if int(record["id"]) > minimum_time:
@@ -85,41 +101,19 @@ def purge(ctx, amount: int, until: str = "0"):
         if record["id"] == until:
             break
     if len(messages_to_delete) > 1:
-        delete_request = requests.post(
+        requests.post(
             url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
             json={"messages": messages_to_delete},
             headers=headers,
-        )
-        if delete_request.status_code == 403:
-            return Message(
-                content=(
-                    "Hey there, the bot is missing permissions to perform this action. Please make sure "
-                    "<@941041925216157746> has the permission to manage messages."
-                ),
-                ephemeral=True,
-            )
-        delete_request.raise_for_status()
+        ).raise_for_status()
     elif len(messages_to_delete) == 1:
-        delete_request = requests.delete(
+        requests.delete(
             url=base_url + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
             headers=headers,
-        )
-        if delete_request.status_code == 403:
-            return Message(
-                content=(
-                    "Hey there, the bot is missing permissions to perform this action. Please make sure "
-                    "<@941041925216157746> has the permission to manage messages."
-                ),
-                ephemeral=True,
-            )
-        delete_request.raise_for_status()
+        ).raise_for_status()
 
     return Message(f"Deleted {len(messages_to_delete)} messages.", ephemeral=True)
 
-
-if "--update" in sys.argv:
-    discord.update_commands(guild_id=830928381100556338)
-    sys.exit()
 
 if "--deploy" in sys.argv:
     discord.update_commands()
