@@ -1,0 +1,22 @@
+name: Purge
+commands:
+  purge:
+    description: Löscht bis zu 100 Nachrichten eines Kanals, sofern sie nicht älter als 2 Wochen sind.
+    amount:
+      name: anzahl
+      description: Anzahl der zu löschenden Nachrichten (1-100).
+    until:
+      name: bis
+      description: "[Nachrichten ID oder -link] Letzte zu löschende Nachricht (falls erreicht)."
+
+permissions:
+  message: <@941041925216157746> braucht folgende Berechtigungen in diesem Kanal, um zu funktionieren. Die Indikatoren zeigen, welche Berechtigungen noch fehlen.
+  view_channel: Kanal ansehen
+  read_message_history: Nachrichtenverlauf anzeigen
+  manage_messages: Nachrichten verwalten.
+
+success: 
+  zero: Aufgrund von Discords Limitationen konnte keine Nachricht gelöscht werden. Alle Nachrichten waren zu alt.
+  one: Eine Nachricht gelöscht.
+  many: |
+    %{count} Nachrichten gelöscht.
