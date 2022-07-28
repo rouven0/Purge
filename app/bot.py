@@ -33,6 +33,7 @@ discord = DiscordInteractions(app)
 app.config["DISCORD_CLIENT_ID"] = getenv("DISCORD_CLIENT_ID", default="")
 app.config["DISCORD_PUBLIC_KEY"] = getenv("DISCORD_PUBLIC_KEY", default="")
 app.config["DISCORD_CLIENT_SECRET"] = getenv("DISCORD_CLIENT_SECRET", default="")
+app.config["DISCORD_SCOPE"] = "applications.commands.update"
 BOT_TOKEN = getenv("BOT_TOKEN", default="")
 
 if "--debug" in sys.argv:
