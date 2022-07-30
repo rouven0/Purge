@@ -6,6 +6,7 @@ on:
 
 jobs:
   deploy-commands:
+    environment: production
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -26,6 +27,7 @@ jobs:
 
   build-and-push:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
     - uses: actions/checkout@v3
