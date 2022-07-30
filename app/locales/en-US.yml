@@ -10,12 +10,12 @@ commands:
       description: "[Message link or id] The last message to be deleted (if reached)."
 
 permissions:
-  message: Hey there, <@941041925216157746> needs the following permissions in this channel in order to work. The indicators show whether you have already granted that permission or not
+  message: Hey there, <@941041925216157746> needs the following permissions in this channel in order to work. The indicators show whether you have already granted that permission or not.
   view_channel: View this channel
   read_message_history: Read message history
   manage_messages: Manage messages
 
 success: 
-  zero: Couldn't delete any messages due to discord limitations. All of the affected messages were too old.
+  zero: Couldn't delete any messages due to Discord limitations. All of the affected messages were too old.
   one: Deleted one message.
   many: Deleted %{count} messages.

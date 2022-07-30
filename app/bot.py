@@ -14,7 +14,7 @@ from flask_discord_interactions.models.option import CommandOptionType, Option
 from i18n import set as set_i18n
 from i18n import t
 
-AVAILABLE_LOCALES = ["en-US", "de"]
+AVAILABLE_LOCALES = ["en-US", "de", "fr"]
 i18n.set("filename_format", "{locale}{format}"),
 i18n.set("fallback", "en-US")
 i18n.set("available_locales", AVAILABLE_LOCALES)
