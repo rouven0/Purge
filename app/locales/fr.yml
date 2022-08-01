@@ -3,7 +3,7 @@ commands:
   purge:
     description: Supprime jusqu'à 100 messages datant de moins de 2 semaines.
     amount:
-      name: montant
+      name: quantité
       description: Le nombre de messages que vous souhaitez supprimer.
     until:
       name: jusque
@@ -11,11 +11,11 @@ commands:
 
 permissions:
   message: Hey, <@941041925216157746> a besoin des permissions suivantes dans ce canal pour pouvoir fonctionner. Les indicateurs montrent si vous avez déjà accordé cette permission ou non.
-  view_channel: Voir cette salon
+  view_channel: Voir ce salon
   read_message_history: Voir les anciens messages
   manage_messages: Gérer les messages
 
 success:
   zero: Impossible de supprimer les messages en raison des limitations de Discord. Tous les messages concernés étaient trop vieux.
-  one: Supprimé un message.
-  many: Supprimé %{count} messages.
+  one: Un message a été supprimé.
+  many: "%{count} messages ont été supprimés."
