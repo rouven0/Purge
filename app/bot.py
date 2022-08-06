@@ -82,7 +82,7 @@ def get_localizations(key: str) -> dict:
             description="[Message link or id] The last message to be deleted (if reached).",
             description_localizations=get_localizations("commands.purge.until.description"),
             type=CommandOptionType.STRING,
-            min_length=18,
+            min_length=19,
             max_length=95,
         ),
     ],
