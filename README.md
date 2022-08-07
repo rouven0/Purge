@@ -1,5 +1,5 @@
 [![Deployment](https://github.com/therealr5/Purge/actions/workflows/deploy.yml/badge.svg)](https://github.com/therealr5/Purge/actions/workflows/deploy.yml)
-[![Image size](https://img.shields.io/docker/image-size/therealr5/purge/latest)](https://hub.docker.com/therealr5/purge)
+[![Image size](https://img.shields.io/docker/image-size/therealr5/purge/latest)](https://hub.docker.com/therealr5/Purge)
 [![Black](https://img.shields.io/badge/codestyle-black-000000)](https://github.com/psf/black)
 ![Lines of code](https://img.shields.io/tokei/lines/github/therealr5/Purge)
 [![Discord](https://img.shields.io/discord/952508187905511484)](https://discord.gg/4JT9JyjkAF)
