@@ -14,16 +14,17 @@ from flask_discord_interactions.models.option import CommandOptionType, Option
 from i18n import set as set_i18n
 from i18n import t
 
-AVAILABLE_LOCALES = ["en-US", "de", "fr"]
-i18n.set("filename_format", "{locale}{format}"),
-i18n.set("fallback", "en-US")
-i18n.set("available_locales", AVAILABLE_LOCALES)
+import config
+
+i18n.set("filename_format", config.I18n.FILENAME_FORMAT)
+i18n.set("fallback", config.I18n.FALLBACK)
+i18n.set("available_locales", config.I18n.AVAILABLE_LOCALES)
 i18n.set("skip_locale_root_data", True)
 
 i18n.load_path.append("./locales")
 
 # ugly thing I have to do to support nested locales
-for locale in AVAILABLE_LOCALES:
+for locale in config.I18n.AVAILABLE_LOCALES:
     logging.info("Initialized locale %s", locale)
     i18n.t("name", locale=locale)
 
@@ -44,10 +45,9 @@ logger.setLevel(logging.INFO)
 
 logger.handlers.clear()
 console_handler = logging.StreamHandler()
-console_handler.setFormatter(logging.Formatter("%(levelname)s [%(module)s.%(funcName)s]: %(message)s"))
+console_handler.setFormatter(logging.Formatter(config.LOG_FORMAT))
 logger.addHandler(console_handler)
 
-base_url = "https://discord.com/api/v10/channels/"
 headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0 (+https://github.com/therealr5/Purge)"}
 
 
@@ -118,7 +118,7 @@ def purge(ctx, amount: int, until: str = "0"):
         until = m.groups()[0]
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
     messages_request = requests.get(
-        url=base_url + str(ctx.channel_id) + "/messages?limit=" + str(amount), headers=headers
+        url=config.BASE_URL + str(ctx.channel_id) + "/messages?limit=" + str(amount), headers=headers
     )
     messages_to_delete = []
     for record in messages_request.json():
@@ -128,13 +128,13 @@ def purge(ctx, amount: int, until: str = "0"):
             break
     if len(messages_to_delete) > 1:
         requests.post(
-            url=base_url + str(ctx.channel_id) + "/messages/bulk-delete",
+            url=config.BASE_URL + str(ctx.channel_id) + "/messages/bulk-delete",
             json={"messages": messages_to_delete},
             headers=headers,
         ).raise_for_status()
     elif len(messages_to_delete) == 1:
         requests.delete(
-            url=base_url + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
+            url=config.BASE_URL + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
             headers=headers,
         ).raise_for_status()
 
