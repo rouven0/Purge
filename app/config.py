@@ -1,7 +1,7 @@
 # pylint: disable=too-few-public-methods
 """Some configuration values"""
 LOG_FORMAT = "%(levelname)s [%(module)s.%(funcName)s]: %(message)s"
-BASE_URL = "https://discord.com/api/v10/channels"
+BASE_URL = "https://discord.com/api/v10/channels/"
 
 
 class I18n:
