@@ -3,7 +3,6 @@ __pycache__
 
 # sensitive files
 .env
-deployTest.sh
 
 # log and temp files
 *.swp
