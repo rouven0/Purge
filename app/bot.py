@@ -61,7 +61,7 @@ def get_localizations(key: str) -> dict:
 
 
 @discord.command(
-    default_member_permissions="73728",
+    default_member_permissions="74752",
     description_localizations=get_localizations("commands.purge.description"),
     dm_permission=False,
     options=[
