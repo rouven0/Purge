@@ -125,17 +125,23 @@ def purge(ctx, amount: int, until: str = "0"):
             messages_to_delete.append(record["id"])
         if record["id"] == until:
             break
-    if len(messages_to_delete) > 1:
-        requests.post(
-            url=config.BASE_URL + str(ctx.channel_id) + "/messages/bulk-delete",
-            json={"messages": messages_to_delete},
-            headers=headers,
-        ).raise_for_status()
-    elif len(messages_to_delete) == 1:
-        requests.delete(
-            url=config.BASE_URL + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
-            headers=headers,
-        ).raise_for_status()
+    if len(messages_to_delete) > 0:
+        if len(messages_to_delete) > 1:
+            delete_request = requests.post(
+                url=config.BASE_URL + str(ctx.channel_id) + "/messages/bulk-delete",
+                json={"messages": messages_to_delete},
+                headers=headers,
+            )
+        else:
+            delete_request = requests.delete(
+                url=config.BASE_URL + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
+                headers=headers,
+            )
+        if delete_request.status_code == 429:
+            logging.info("Ran into a ratelimit at %s", delete_request.request.url)
+            return Message(t("ratelimited"), ephemeral=True)
+        else:
+            delete_request.raise_for_status()
 
     return Message(t("success", count=len(messages_to_delete)), ephemeral=True)
 

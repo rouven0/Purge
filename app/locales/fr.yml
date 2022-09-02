@@ -19,3 +19,5 @@ success:
   zero: Impossible de supprimer les messages en raison des limitations de Discord. Tous les messages concernés étaient trop vieux.
   one: Un message a été supprimé.
   many: "%{count} messages ont été supprimés."
+
+ratelimited: Relaxer. Nous avons des limites de taux à respecter!

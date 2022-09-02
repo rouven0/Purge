@@ -20,3 +20,5 @@ success:
   one: Eine Nachricht gelöscht.
   many: |
     %{count} Nachrichten gelöscht.
+
+ratelimited: Immer langsam. Unsere Aktionsrate wird begrenzt!
