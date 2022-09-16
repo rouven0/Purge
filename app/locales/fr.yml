@@ -8,16 +8,13 @@ commands:
     until:
       name: jusque
       description: "[Lien ou ID du message] Dernier message à supprimer (si atteint)."
-
 permissions:
   message: Hey, <@941041925216157746> a besoin des permissions suivantes dans ce canal pour pouvoir fonctionner. Les indicateurs montrent si vous avez déjà accordé cette permission ou non.
   view_channel: Voir ce salon
   read_message_history: Voir les anciens messages
   manage_messages: Gérer les messages
-
 success:
   zero: Impossible de supprimer les messages en raison des limitations de Discord. Tous les messages concernés étaient trop vieux.
   one: Un message a été supprimé.
-  many: "%{count} messages ont été supprimés."
-
+  many: '%{count} messages ont été supprimés.'
 ratelimited: Relaxer. Nous avons des limites de taux à respecter!

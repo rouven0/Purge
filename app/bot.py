@@ -23,6 +23,14 @@ i18n.set("skip_locale_root_data", True)
 
 i18n.load_path.append("./locales")
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+logger.handlers.clear()
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(logging.Formatter(config.LOG_FORMAT))
+logger.addHandler(console_handler)
+
 # ugly thing I have to do to support nested locales
 for locale in config.I18n.AVAILABLE_LOCALES:
     logging.info("Initialized locale %s", locale)
@@ -39,13 +47,6 @@ BOT_TOKEN = getenv("BOT_TOKEN", default="")
 if "--debug" in sys.argv:
     app.config["DONT_VALIDATE_SIGNATURE"] = True
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-logger.handlers.clear()
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(logging.Formatter(config.LOG_FORMAT))
-logger.addHandler(console_handler)
 
 headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0 (+https://github.com/therealr5/Purge)"}
 
