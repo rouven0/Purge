@@ -8,17 +8,13 @@ commands:
     until:
       name: bis
       description: "[Nachrichten ID oder -link] Letzte zu löschende Nachricht (falls erreicht)."
-
 permissions:
   message: <@941041925216157746> braucht folgende Berechtigungen in diesem Kanal, um zu funktionieren. Die Indikatoren zeigen, welche Berechtigungen noch fehlen.
   view_channel: Kanal ansehen
   read_message_history: Nachrichtenverlauf anzeigen
   manage_messages: Nachrichten verwalten.
-
-success: 
+success:
   zero: Aufgrund von Discords Limitationen konnte keine Nachricht gelöscht werden. Alle Nachrichten waren zu alt.
   one: Eine Nachricht gelöscht.
-  many: |
-    %{count} Nachrichten gelöscht.
-
+  many: '%{count} Nachrichten gelöscht.'
 ratelimited: Immer langsam. Unsere Aktionsrate wird begrenzt!
