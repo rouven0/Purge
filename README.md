@@ -3,6 +3,7 @@
 [![Black](https://img.shields.io/badge/codestyle-black-000000)](https://github.com/psf/black)
 ![Lines of code](https://img.shields.io/tokei/lines/github/therealr5/Purge)
 [![Discord](https://img.shields.io/discord/952508187905511484)](https://discord.gg/4JT9JyjkAF)
+[![Crowdin](https://badges.crowdin.net/purge/localized.svg)](https://crowdin.com/project/purge)
 
 # Purge
 Minimalistic purge bot for Discord
