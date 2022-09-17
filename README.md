@@ -2,8 +2,9 @@
 [![Image size](https://img.shields.io/docker/image-size/therealr5/purge/latest)](https://hub.docker.com/r/therealr5/purge)
 [![Black](https://img.shields.io/badge/codestyle-black-000000)](https://github.com/psf/black)
 ![Lines of code](https://img.shields.io/tokei/lines/github/therealr5/Purge)
-[![Discord](https://img.shields.io/discord/952508187905511484)](https://discord.gg/4JT9JyjkAF)
 [![Crowdin](https://badges.crowdin.net/purge/localized.svg)](https://crowdin.com/project/purge)
+
+[![Discord](https://discord.com/api/v10/guilds/952508187905511484/widget.png)](https://discord.gg/4JT9JyjkAF)
 
 # Purge
 Minimalistic purge bot for Discord
