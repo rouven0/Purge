@@ -34,7 +34,7 @@ logger.addHandler(console_handler)
 # ugly thing I have to do to support nested locales
 for locale in config.I18n.AVAILABLE_LOCALES:
     logging.info("Initialized locale %s", locale)
-    i18n.t("name", locale=locale)
+    i18n.t("ratelimited", locale=locale)
 
 app = Flask(__name__)
 discord = DiscordInteractions(app)
@@ -63,6 +63,7 @@ def get_localizations(key: str) -> dict:
 
 @discord.command(
     default_member_permissions="74752",
+    name_localizations=get_localizations("commands.purge.name"),
     description_localizations=get_localizations("commands.purge.description"),
     dm_permission=False,
     options=[
