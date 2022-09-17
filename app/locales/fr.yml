@@ -1,6 +1,6 @@
-name: Purge
 commands:
   purge:
+    name: purger
     description: Supprime jusqu'à 100 messages datant de moins de 2 semaines.
     amount:
       name: quantité
