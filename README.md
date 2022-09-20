@@ -30,7 +30,7 @@ BOT_TOKEN
 
 ### Registering commands
 To register commands, simply run `python3 app/bot.py --deploy` after cloning the repo and installing all [requirements](https://github.com/therealr5/Purge/blob/main/requirements.txt).
-The following environment variables are required to be set before running this:
+The following environment variables are required to be set before executing the command:
 ```env
 DISCORD_CLIENT_ID
 DISCORD_CLIENT_SECRET
