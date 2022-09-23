@@ -4,7 +4,7 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/therealr5/Purge)
 [![Crowdin](https://badges.crowdin.net/purge/localized.svg)](https://crowdin.com/project/purge)
 
-[![Discord](https://discord.com/api/v10/guilds/952508187905511484/widget.png)](https://discord.gg/4JT9JyjkAF)
+[![Discord Server](https://discord.com/api/v10/guilds/952508187905511484/widget.png)](https://discord.gg/4JT9JyjkAF)
 
 # Purge
 Minimalistic purge bot for Discord
