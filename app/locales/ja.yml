@@ -1,6 +1,6 @@
 commands:
   purge:
-    name: purge
+    name: 翻訳の一掃
     description: Deletes up to 100 messages that are not older than 2 weeks.
     amount:
       name: amount
