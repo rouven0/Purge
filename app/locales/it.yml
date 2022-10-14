@@ -1,7 +1,7 @@
 commands:
   purge:
-    name: purge
-    description: Deletes up to 100 messages that are not older than 2 weeks.
+    name: elimina
+    description: Elimina fino a 100 messaggi che non sono più vecchi di due settimane.
     amount:
       name: amount
       description: The amount of messages you want to delete (1-100).
