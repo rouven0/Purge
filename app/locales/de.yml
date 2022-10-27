@@ -1,6 +1,6 @@
 commands:
   purge:
-    name: säubern
+    name: purge
     description: Löscht bis zu 100 Nachrichten eines Kanals, sofern sie nicht älter als 2 Wochen sind.
     amount:
       name: anzahl
