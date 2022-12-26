@@ -17,4 +17,4 @@ success:
   zero: No se pudo eliminar ningún mensaje debido a las limitaciones de Discord. Todos los mensajes afectados eran demasiado antiguos.
   one: Mensaje borrado.
   many: '%{count} mensajes eliminados.'
-ratelimited: Slow down. We have ratelimits to obey!
+ratelimited: Más despacio. ¡Tenemos ratelimits que obedecer!
