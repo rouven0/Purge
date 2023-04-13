@@ -48,8 +48,10 @@ buildPythonPackage {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/${python.sitePackages}
-    cp -r . $out/${python.sitePackages}/Purge
+    cp -r . $out/${python.sitePackages}/purge
     runHook postInstall '';
+
+  shellHook = "export FLASK_APP=purge";
 
   format = "other";
 }

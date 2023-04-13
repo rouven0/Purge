@@ -35,7 +35,7 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${appEnv}/bin/gunicorn bot:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
+        ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
         User = "purge";
         Group = "purge";
         EnvironmentFile = cfg.environmentFile;
