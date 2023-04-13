@@ -4,6 +4,7 @@ import re
 import sys
 from os import getenv
 from time import time
+import pathlib
 
 import i18n
 import requests
@@ -21,7 +22,7 @@ i18n.set("fallback", config.I18n.FALLBACK)
 i18n.set("available_locales", config.I18n.AVAILABLE_LOCALES)
 i18n.set("skip_locale_root_data", True)
 
-i18n.load_path.append("./locales")
+i18n.load_path.append(str(pathlib.Path(__file__).parent.resolve()) + "/locales")
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
