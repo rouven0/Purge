@@ -14,7 +14,7 @@ from flask_discord_interactions.models.option import CommandOptionType, Option
 from i18n import set as set_i18n
 from i18n import t
 
-import config
+import purge.config as config
 
 i18n.set("filename_format", config.I18n.FILENAME_FORMAT)
 i18n.set("fallback", config.I18n.FALLBACK)
