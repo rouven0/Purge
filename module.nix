@@ -1,28 +1,29 @@
-{ self, lib, pkgs, config, types, ... }:
+{ self, lib, pkgs, config, ... }:
+with lib;
 let
   cfg = config.services.purge;
   appEnv = pkgs.python3.withPackages (p: with p; [ gunicorn self.packages."x86_64-linux".default ]);
 in
 {
   options.services.purge = {
-    enable = lib.mkEnableOption "Purge";
-    environmentFile = lib.mkOption {
+    enable = mkEnableOption "Purge";
+    environmentFile = mkOption {
       type = types.nullOr types.path;
       default = null;
-      description = lib.mdDoc ''
+      description = mdDoc ''
         Environment file as defined in {manpage}`systemd.exec(5)`.
       '';
     };
-    listenPort = lib.mkOption {
+    listenPort = mkOption {
       type = types.port;
       default = 9100;
-      description = lib.mdDoc ''
+      description = mdDoc ''
         Port the app will run on.
       '';
     };
   };
 
-  config = lib.mkIf (cfg.enable) {
+  config = mkIf (cfg.enable) {
     users.users.purge = {
       isSystemUser = true;
       group = "purge";
