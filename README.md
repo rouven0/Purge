@@ -36,9 +36,8 @@ BOT_TOKEN
 To expose the app to the internet, simply put an nginx reverse proxy in place.
 
 ```nix
-{ config, ... }
+{ config, ... }:
 {
-    ...
     services.nginx.virtualHosts."purge.example.com" = {
         enableACME = true;
         forceSSL = true;
