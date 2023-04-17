@@ -16,8 +16,45 @@
 
       devShells = forAllSystems (system: {
         default = pkgs.${system}.mkShellNoCC {
-          packages = with pkgs.${system}; [
-            self.packages."x86_64-linux".default
+          packages = with pkgs.${system}.python310Packages; [
+            flask
+            pyyaml
+            gunicorn
+            python-i18n
+            (buildPythonPackage
+              rec {
+                pname = "Flask-Discord-Interactions";
+                version = "2.1.2";
+                propagatedBuildInputs = [
+                  flask
+                  requests
+                  requests-toolbelt
+                  pynacl
+                  pytest
+                  (buildPythonPackage
+                    rec {
+                      pname = "quart";
+                      version = "0.18.4";
+                      propagatedBuildInputs = [
+                        flask
+                        hypercorn
+                        markupsafe
+                        blinker
+                        aiofiles
+                      ];
+
+                      src = fetchPypi {
+                        inherit pname version;
+                        sha256 = "wXZvJpzbhdr52me6VBcKv3g5rKlzBNy0zQd46r+0QsY=";
+                      };
+                    })
+                ];
+
+                src = fetchPypi {
+                  inherit pname version;
+                  sha256 = "3jN0RcArARN1nt6pZTPQS7ZglFUE17ZSpLcsOX49gLM=";
+                };
+              })
           ];
         };
       });
