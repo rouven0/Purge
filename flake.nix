@@ -23,7 +23,7 @@
           pkgs.${system}.mkShell {
             packages = [ pythonEnv ];
             shellHook = ''
-              export PYTHONPATH="${pythonEnv}/bin/python"
+              export PYTHONPATH="${pythonEnv}/lib/python3.10/site-packages/"
             '';
           };
       });
