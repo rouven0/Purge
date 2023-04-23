@@ -2,7 +2,7 @@
 
 buildPythonPackage {
   name = "Purge";
-  src = ./app;
+  src = ./purge;
 
   propagatedBuildInputs = with python310Packages; [
     flask
