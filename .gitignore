@@ -9,3 +9,6 @@ __pycache__
 
 # virtual environment
 venv/
+
+# nix builds
+result

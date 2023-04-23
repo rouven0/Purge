@@ -1,3 +1,0 @@
-files:
-  - source: /purge/locales/en-US.yml
-    translation: /purge/locales/%two_letters_code%.yml
