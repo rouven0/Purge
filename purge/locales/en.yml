@@ -17,4 +17,4 @@ success:
   zero: Couldn't delete any messages due to Discord limitations. All of the affected messages were too old.
   one: Deleted one message.
   many: Deleted %{count} messages.
-ratelimited: Slow down. We have rate limits to obey!
+ratelimited: Slow down. We have ratelimits to obey!
