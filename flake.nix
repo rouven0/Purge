@@ -12,6 +12,9 @@
       packages = forAllSystems (system: {
         default = pkgs.${system}.python310Packages.callPackage ./default.nix { };
       });
+      hydraJobs = forAllSystems (system: {
+        default = self.packages.${system}.default;
+      });
       nixosModules.default = import ./module.nix;
 
       devShells = forAllSystems (system: {
