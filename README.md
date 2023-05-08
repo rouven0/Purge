@@ -48,7 +48,7 @@ To expose the app to the internet, simply put an nginx reverse proxy in place.
 ```
 
 ### Registering commands
-To register commands, simply run `python3 app/bot.py --deploy` after cloning the repo and installing all [requirements](https://github.com/therealr5/Purge/blob/main/requirements.txt).
+To register commands, simply run `python3 purge/__init__.py --deploy` after cloning the repo and installing all requirements (If you are on nix, this can be achieved via `nix develop`).
 The following environment variables are required to be set before executing the command:
 ```env
 DISCORD_CLIENT_ID
