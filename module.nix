@@ -1,4 +1,4 @@
-{ self, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 with lib;
 let
   cfg = config.services.purge;
