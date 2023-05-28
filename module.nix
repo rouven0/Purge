@@ -46,15 +46,15 @@ in
       enable = true;
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      environment = {
+        DISCORD_CLIENT_ID = cfg.discord.clientId;
+        DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
+      };
       serviceConfig = {
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
         User = "purge";
         Group = "purge";
         EnvironmentFile = cfg.environmentFile;
-        Environment = {
-          DISCORD_CLIENT_ID = cfg.discord.clientId;
-          DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
-        };
       };
     };
   };
