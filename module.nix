@@ -22,13 +22,13 @@ in
       '';
     };
     discord.clientId = mkOption {
-      type = types.string;
+      type = types.str;
       description = mdDoc ''
         Client id to use with discord.
       '';
     };
     discord.publicKey = mkOption {
-      type = types.string;
+      type = types.str;
       description = mdDoc ''
         Public key to verify requests.
       '';
