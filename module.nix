@@ -21,6 +21,18 @@ in
         Port the app will run on.
       '';
     };
+    discord.clientId = mkOption {
+      type = types.string;
+      description = mdDoc ''
+        Client id to use with discord.
+      '';
+    };
+    discord.publicKey = mkOption {
+      type = types.string;
+      description = mdDoc ''
+        Public key to verify requests.
+      '';
+    };
   };
 
   config = mkIf (cfg.enable) {
@@ -39,6 +51,10 @@ in
         User = "purge";
         Group = "purge";
         EnvironmentFile = cfg.environmentFile;
+        Environment = {
+          DISCORD_CLIENT_ID = cfg.discord.clientId;
+          DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
+        };
       };
     };
   };
