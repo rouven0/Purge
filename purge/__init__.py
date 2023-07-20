@@ -50,7 +50,7 @@ discord = DiscordInteractions(app)
 app.config["DISCORD_CLIENT_ID"] = getenv("DISCORD_CLIENT_ID", default="")
 app.config["DISCORD_PUBLIC_KEY"] = getenv("DISCORD_PUBLIC_KEY", default="")
 app.config["DISCORD_CLIENT_SECRET"] = getenv("DISCORD_CLIENT_SECRET", default="")
-BOT_TOKEN = getenv("BOT_TOKEN", default="")
+BOT_TOKEN = open(getenv("TOKEN_FILE", default="/dev/null"), "r").readline().strip()
 
 if "--debug" in sys.argv:
     app.config["DONT_VALIDATE_SIGNATURE"] = True

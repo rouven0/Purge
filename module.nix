@@ -7,13 +7,6 @@ in
 {
   options.services.purge = {
     enable = mkEnableOption "Purge";
-    environmentFile = mkOption {
-      type = types.nullOr types.path;
-      default = null;
-      description = mdDoc ''
-        Environment file as defined in {manpage}`systemd.exec(5)`.
-      '';
-    };
     listenPort = mkOption {
       type = types.port;
       default = 9100;
@@ -33,6 +26,13 @@ in
         Public key to verify requests.
       '';
     };
+    tokenFile = mkOption {
+      type = types.path;
+      default = null;
+      description = mdDoc ''
+        File containing the Bot Token to authenticate to Discord.
+      '';
+    };
   };
 
   config = mkIf (cfg.enable) {
@@ -49,12 +49,12 @@ in
       environment = {
         DISCORD_CLIENT_ID = cfg.discord.clientId;
         DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
+        TOKEN_FILE = cfg.discord.tokenFile;
       };
       serviceConfig = {
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
         User = "purge";
         Group = "purge";
-        EnvironmentFile = cfg.environmentFile;
       };
     };
   };
