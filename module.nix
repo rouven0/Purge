@@ -14,24 +14,27 @@ in
         Port the app will run on.
       '';
     };
-    discord.clientId = mkOption {
-      type = types.str;
-      description = mdDoc ''
-        Client id to use with discord.
-      '';
-    };
-    discord.publicKey = mkOption {
-      type = types.str;
-      description = mdDoc ''
-        Public key to verify requests.
-      '';
-    };
-    tokenFile = mkOption {
-      type = types.path;
-      default = null;
-      description = mdDoc ''
-        File containing the Bot Token to authenticate to Discord.
-      '';
+    discord = {
+      clientId = mkOption {
+        type = types.str;
+        description = mdDoc ''
+          Client id to use with Discord. 
+        '';
+      };
+      publicKey = mkOption {
+        type = types.str;
+        description = mdDoc ''
+          Public key to verify requests.
+        '';
+      };
+      tokenFile = mkOption {
+        type = types.path;
+        default = null;
+        description = mdDoc ''
+          File containing the Bot Token to authenticate to Discord.
+        '';
+      };
+
     };
   };
 
