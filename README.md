@@ -16,20 +16,22 @@ Please keep in mind that due to discord limits, the messages may not be older th
 
 ## Self-host this bot
 ### Running the server
-You can self-host this bot using Nix. After importing the nixosModule from the flake you can simply enable the service using
+You can self-host this bot using Nix. After importing the nixosModule from the flake you can simply enable the service using the configuration below.
+
+#### Configuration
 ```nix
 { config, ...}:
 {
-    services.purge.enable = true;
-    services.purge.environmentFile = /path/to/your/file;
+  services.purge = {
+    enable = true;
+    listenPort = 9000;
+    discord = {
+      clientId = "941041925216157746";
+      publicKey = "d2945f6130d9b4a8dda8c8bf52db5dee127a82f89c6b8782e84aa8f45f61d402";
+      tokenFile = "/run/secrets/purge";
+    };
+  };
 }
-```
-
-The environmentFile should contain the following variables:
-```env
-DISCORD_CLIENT_ID
-DISCORD_PUBLIC_KEY
-BOT_TOKEN
 ```
 
 To expose the app to the internet, simply put an nginx reverse proxy in place.
