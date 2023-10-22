@@ -46,10 +46,11 @@ in
       environment = {
         DISCORD_CLIENT_ID = cfg.discord.clientId;
         DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
-        TOKEN_FILE = cfg.discord.tokenFile;
       };
       serviceConfig = {
         DynamicUser = true;
+        LoadCredential = "discord-token:${cfg.discord.tokenFile}";
+
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
       };
     };
