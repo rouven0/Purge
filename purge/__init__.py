@@ -52,7 +52,7 @@ app.config["DISCORD_PUBLIC_KEY"] = getenv("DISCORD_PUBLIC_KEY", default="")
 app.config["DISCORD_CLIENT_SECRET"] = getenv("DISCORD_CLIENT_SECRET", default="")
 
 # we use systemd credentials to load the bot token
-BOT_TOKEN = open(getenv("CREDENTIALS_DIRECTORY/discord-token", default="/dev/null"), "r").readline().strip()
+BOT_TOKEN = open(getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/discord-token", "r").readline().strip()
 
 if "--debug" in sys.argv:
     app.config["DONT_VALIDATE_SIGNATURE"] = True
