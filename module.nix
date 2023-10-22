@@ -39,12 +39,6 @@ in
   };
 
   config = mkIf (cfg.enable) {
-    users.users.purge = {
-      isSystemUser = true;
-      group = "purge";
-    };
-    users.groups.purge = { };
-
     systemd.services.purge = {
       enable = true;
       after = [ "network.target" ];
@@ -55,9 +49,8 @@ in
         TOKEN_FILE = cfg.discord.tokenFile;
       };
       serviceConfig = {
+        DynamicUser = true;
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
-        User = "purge";
-        Group = "purge";
       };
     };
   };
