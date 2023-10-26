@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.services.purge;
-  appEnv = pkgs.python311.withPackages (p: with p; [ gunicorn (pkgs.python310Packages.callPackage ./default.nix { }) ]);
+  appEnv = pkgs.python311.withPackages (p: with p; [ gunicorn (pkgs.python311Packages.callPackage ./default.nix { }) ]);
 in
 {
   options.services.purge = {
