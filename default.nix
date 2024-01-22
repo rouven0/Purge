@@ -13,13 +13,14 @@ buildPythonPackage {
       rec {
         pname = "Flask-Discord-Interactions";
         version = "2.1.2";
+        # skip the tests since they require quart
+        doCheck = false;
         propagatedBuildInputs = [
           flask
           requests
           requests-toolbelt
           pynacl
           pytest
-          quart
         ];
         src = fetchPypi {
           inherit pname version;
