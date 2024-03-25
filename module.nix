@@ -7,11 +7,10 @@ in
 {
   options.services.purge = {
     enable = mkEnableOption "Purge";
-    listenPort = mkOption {
-      type = types.port;
-      default = 9100;
+    domain = mkOption {
+      type = types.str;
       description = mdDoc ''
-        Port the app will run on.
+        Domain name the app runs under.
       '';
     };
     discord = {
@@ -50,8 +49,16 @@ in
       serviceConfig = {
         DynamicUser = true;
         LoadCredential = "discord-token:${cfg.discord.tokenFile}";
-        ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
+        ExecStart = "${appEnv}/bin/gunicorn purge:app -b /run/purge.sock --error-logfile -";
       };
     };
+    services.nginx.virtualHosts."${cfg.domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "unix:/run/purge.sock";
+      };
+    };
+
   };
 }
