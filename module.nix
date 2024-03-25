@@ -41,6 +41,7 @@ in
     systemd.sockets.purge = {
       wantedBy = [ "sockets.target" ];
       before = [ "nginx.service" ];
+      requires = [ "purge.socket" ];
       socketConfig.ListenStream = "/run/purge.sock";
     };
     systemd.services.purge = {
