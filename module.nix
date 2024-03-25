@@ -42,7 +42,7 @@ in
       wantedBy = [ "sockets.target" ];
       before = [ "nginx.service" ];
       requires = [ "purge.socket" ];
-      socketConfig.ListenStream = "/run/purge.sock";
+      socketConfig.ListenStream = "/run/purge/app.sock";
     };
     systemd.services.purge = {
       enable = true;
@@ -54,14 +54,14 @@ in
       serviceConfig = {
         DynamicUser = true;
         LoadCredential = "discord-token:${cfg.discord.tokenFile}";
-        ExecStart = "${appEnv}/bin/gunicorn purge:app -b /run/purge.sock --error-logfile -";
+        ExecStart = "${appEnv}/bin/gunicorn purge:app -b /run/purge/app.sock --error-logfile -";
       };
     };
 
     services.nginx.virtualHosts."${cfg.domain}" = {
       enableACME = true;
       forceSSL = true;
-      locations."/".proxyPass = "http://unix:/run/purge.sock";
+      locations."/".proxyPass = "http://unix:/run/purge/app.sock";
     };
 
   };
