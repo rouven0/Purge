@@ -55,9 +55,9 @@ in
     services.nginx.virtualHosts."${cfg.domain}" = {
       enableACME = true;
       forceSSL = true;
-      locations."/" = {
-        proxyPass = "unix:/run/purge.sock";
-      };
+      extraConfig = ''
+        uwsgi_pass "unix:/run/purge.sock";
+      '';
     };
 
   };
