@@ -50,7 +50,6 @@ in
       serviceConfig = {
         DynamicUser = true;
         LoadCredential = "discord-token:${cfg.discord.tokenFile}";
-
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b 0.0.0.0:${toString cfg.listenPort} --error-logfile -";
       };
     };
