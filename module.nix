@@ -38,10 +38,14 @@ in
   };
 
   config = mkIf (cfg.enable) {
+    systemd.sockets.purge = {
+      wantedBy = [ "sockets.target" ];
+      before = [ "nginx.service" ];
+      socketConfig.ListenStream = "/run/purge.sock";
+    };
     systemd.services.purge = {
       enable = true;
       after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
       environment = {
         DISCORD_CLIENT_ID = cfg.discord.clientId;
         DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
@@ -52,10 +56,11 @@ in
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b /run/purge.sock --error-logfile -";
       };
     };
+
     services.nginx.virtualHosts."${cfg.domain}" = {
       enableACME = true;
       forceSSL = true;
-      extraConfig = ''
+      locations."/".extraConfig = ''
         uwsgi_pass "unix:/run/purge.sock";
       '';
     };
