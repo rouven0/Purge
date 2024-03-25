@@ -62,7 +62,7 @@ if "--debug" in sys.argv:
     app.config["DONT_VALIDATE_SIGNATURE"] = True
 
 
-headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0 (+https://github.com/therealr5/Purge)"}
+headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0 (+https://github.com/rouven0/Purge)"}
 
 
 def get_localizations(key: str) -> dict:
