@@ -61,7 +61,7 @@ in
     services.nginx.virtualHosts."${cfg.domain}" = {
       enableACME = true;
       forceSSL = true;
-      proxyPass = "http://unix:/run/purge.sock";
+      locations."/".proxyPass = "http://unix:/run/purge.sock";
     };
 
   };
