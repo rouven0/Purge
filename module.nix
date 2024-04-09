@@ -41,12 +41,12 @@ in
     systemd.sockets.purge = {
       wantedBy = [ "sockets.target" ];
       before = [ "nginx.service" ];
-      requires = [ "purge.socket" ];
       socketConfig.ListenStream = "/run/purge/app.sock";
     };
     systemd.services.purge = {
       enable = true;
       after = [ "network.target" ];
+      requires = [ "purge.socket" ];
       environment = {
         DISCORD_CLIENT_ID = cfg.discord.clientId;
         DISCORD_PUBLIC_KEY = cfg.discord.publicKey;
