@@ -1,3 +1,8 @@
+# This Project moved to Sourcehut
+https://sr.ht/~rouven/purge
+
+
+
 [![Black](https://img.shields.io/badge/codestyle-black-000000)](https://github.com/psf/black)
 ![Lines of code](https://img.shields.io/tokei/lines/github/rouven0/Purge)
 [![Discord Server](https://discord.com/api/v10/guilds/952508187905511484/widget.png)](https://discord.gg/4JT9JyjkAF)
