@@ -57,12 +57,5 @@ in
         ExecStart = "${appEnv}/bin/gunicorn purge:app -b /run/purge/app.sock --error-logfile -";
       };
     };
-
-    services.nginx.virtualHosts."${cfg.domain}" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".proxyPass = "http://unix:/run/purge/app.sock";
-    };
-
   };
 }
