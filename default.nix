@@ -1,10 +1,10 @@
-{ buildPythonPackage, fetchPypi, python311Packages, python, ... }:
+{ buildPythonPackage, fetchPypi, flask, pyyaml, gunicorn, python-i18n, requests, requests-toolbelt, pynacl, pytest, python, ... }:
 
 buildPythonPackage {
   name = "Purge";
   src = ./purge;
 
-  propagatedBuildInputs = with python311Packages; [
+  propagatedBuildInputs = [
     flask
     pyyaml
     gunicorn
