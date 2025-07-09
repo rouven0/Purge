@@ -1,4 +1,4 @@
-{ buildPythonPackage, fetchPypi, flask, pyyaml, gunicorn, python-i18n, requests, requests-toolbelt, pynacl, pytest, python, ... }:
+{ buildPythonPackage, fetchPypi, flask, pyyaml, gunicorn, python-i18n, requests, requests-toolbelt, pynacl, pytest, python, setuptools, ... }:
 
 buildPythonPackage {
   name = "Purge";
@@ -13,6 +13,8 @@ buildPythonPackage {
       rec {
         pname = "Flask-Discord-Interactions";
         version = "2.1.2";
+        pyproject = true;
+        build-system = [ setuptools ];
         # skip the tests since they require quart
         doCheck = false;
         propagatedBuildInputs = [
