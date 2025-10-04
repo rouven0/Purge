@@ -10,7 +10,7 @@
     in
     {
       packages = forAllSystems (system: {
-        default = pkgs.${system}.python311Packages.callPackage ./default.nix { };
+        default = pkgs.${system}.python3Packages.callPackage ./default.nix { };
       });
       hydraJobs = forAllSystems (system: {
         default = self.packages.${system}.default;
@@ -20,7 +20,7 @@
       devShells = forAllSystems (system: {
         default =
           let
-            pythonEnv = pkgs.${system}.python311.withPackages (p: with p; [ gunicorn (self.packages.${system}.default) ]);
+            pythonEnv = pkgs.${system}.python3.withPackages (p: with p; [ gunicorn (self.packages.${system}.default) ]);
           in
 
           pkgs.${system}.mkShell {
