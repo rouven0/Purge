@@ -4,7 +4,6 @@ import re
 import sys
 from os import getenv
 from time import time
-import pathlib
 
 import i18n
 import requests
