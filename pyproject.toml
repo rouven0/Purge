@@ -1,0 +1,12 @@
+[project]
+name = "purge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "flask-discord-interactions>=2.1.2",
+    "python-i18n>=0.3.9",
+    "ruff>=0.14.13",
+    "ty>=0.0.12",
+]

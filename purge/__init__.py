@@ -75,7 +75,7 @@ def get_localizations(key: str) -> dict:
 
 
 @discord.command(
-    default_member_permissions="74752",
+    default_member_permissions=74752,
     name_localizations=get_localizations("commands.purge.name"),
     description_localizations=get_localizations("commands.purge.description"),
     dm_permission=False,
@@ -152,7 +152,7 @@ def purge(ctx, amount: int, until: str = "0"):
                 headers=headers,
             )
         if delete_request.status_code == 429:
-            logging.warn("Ran into a ratelimit at %s", delete_request.request.url)
+            logging.warning("Ran into a ratelimit at %s", delete_request.request.url)
             return Message(t("ratelimited"), ephemeral=True)
         else:
             delete_request.raise_for_status()
