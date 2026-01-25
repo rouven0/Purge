@@ -43,6 +43,7 @@ app = Flask(__name__)
 def get_robots():
     return send_file(f"{config.BASE_PATH}/robots.txt")
 
+
 @app.route("/health")
 def health():
     return "OK"
@@ -55,13 +56,20 @@ app.config["DISCORD_PUBLIC_KEY"] = getenv("DISCORD_PUBLIC_KEY", default="")
 app.config["DISCORD_CLIENT_SECRET"] = getenv("DISCORD_CLIENT_SECRET", default="")
 
 # we use systemd credentials to load the bot token
-BOT_TOKEN = open(getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/discord-token", "r").readline().strip()
+BOT_TOKEN = (
+    open(getenv("CREDENTIALS_DIRECTORY", default="/dev/null") + "/discord-token", "r")
+    .readline()
+    .strip()
+)
 
 if "--debug" in sys.argv:
     app.config["DONT_VALIDATE_SIGNATURE"] = True
 
 
-headers = {"Authorization": f"Bot {BOT_TOKEN}", "user-agent": "Purgebot/1.0 (+https://github.com/rouven0/Purge)"}
+headers = {
+    "Authorization": f"Bot {BOT_TOKEN}",
+    "user-agent": "Purgebot/1.0 (+https://github.com/rouven0/Purge)",
+}
 
 
 def get_localizations(key: str) -> dict:
@@ -84,7 +92,9 @@ def get_localizations(key: str) -> dict:
             name="amount",
             name_localizations=get_localizations("commands.purge.amount.name"),
             description="The amount of messages you want to delete (1-100).",
-            description_localizations=get_localizations("commands.purge.amount.description"),
+            description_localizations=get_localizations(
+                "commands.purge.amount.description"
+            ),
             type=CommandOptionType.INTEGER,
             required=True,
             min_value=1,
@@ -94,7 +104,9 @@ def get_localizations(key: str) -> dict:
             name="until",
             name_localizations=get_localizations("commands.purge.until.name"),
             description="[Message link or id] The last message to be deleted (if reached).",
-            description_localizations=get_localizations("commands.purge.until.description"),
+            description_localizations=get_localizations(
+                "commands.purge.until.description"
+            ),
             type=CommandOptionType.STRING,
             min_length=19,
             max_length=95,
@@ -111,18 +123,26 @@ def purge(ctx, amount: int, until: str = "0"):
         until,
         ctx.locale,
     )
-    permissions = {10: "view_channel", 13: "manage_messages", 16: "read_message_history"}
+    permissions = {
+        10: "view_channel",
+        13: "manage_messages",
+        16: "read_message_history",
+    }
 
     def has_permission_indicator(num: int) -> str:
         """
         Returns an indicator for the given permission
         """
-        return ("✅ " if int(ctx.app_permissions) & (1 << num) else "🚫 ") + t(f"permissions.{permissions[num]}")
+        return ("✅ " if int(ctx.app_permissions) & (1 << num) else "🚫 ") + t(
+            f"permissions.{permissions[num]}"
+        )
 
     if not all([int(ctx.app_permissions) & (1 << n) for n in permissions.keys()]):
         return Message(
             content=(
-                t("permissions.message") + "\n" + "\n".join([has_permission_indicator(n) for n in permissions.keys()])
+                t("permissions.message")
+                + "\n"
+                + "\n".join([has_permission_indicator(n) for n in permissions.keys()])
             ),
             ephemeral=True,
         )
@@ -131,7 +151,8 @@ def purge(ctx, amount: int, until: str = "0"):
         until = m.groups()[0]
     minimum_time = int((time() - 14 * 24 * 60 * 60) * 1000.0 - 1420070400000) << 22
     messages_request = requests.get(
-        url=config.BASE_URL + str(ctx.channel_id) + "/messages?limit=" + str(amount), headers=headers
+        url=config.BASE_URL + str(ctx.channel_id) + "/messages?limit=" + str(amount),
+        headers=headers,
     )
     messages_to_delete = []
     for record in messages_request.json():
@@ -148,7 +169,10 @@ def purge(ctx, amount: int, until: str = "0"):
             )
         else:
             delete_request = requests.delete(
-                url=config.BASE_URL + str(ctx.channel_id) + "/messages/" + messages_to_delete[0],
+                url=config.BASE_URL
+                + str(ctx.channel_id)
+                + "/messages/"
+                + messages_to_delete[0],
                 headers=headers,
             )
         if delete_request.status_code == 429:
