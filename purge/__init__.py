@@ -111,8 +111,7 @@ def purge(ctx, amount: int, until: str = "0"):
     "Deletes up to 100 messages that are not older than 2 weeks."
     set_i18n("locale", ctx.locale)
     logging.info(
-        "%s used /purge. amount: %s until: %s using locale %s",
-        ctx.author.username,
+        "Successfully invoked /purge. amount: %s until: %s using locale %s",
         amount,
         until,
         ctx.locale,
