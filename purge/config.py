@@ -5,7 +5,7 @@ import pathlib
 
 LOG_FORMAT = "%(levelname)s [%(module)s.%(funcName)s]: %(message)s"
 BASE_URL = "https://discord.com/api/v10/channels/"
-BASE_PATH = str(pathlib.Path(__file__).parent.resolve())
+BASE_PATH = "purge"
 
 
 class I18n:
