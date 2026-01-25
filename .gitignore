@@ -1,5 +1,7 @@
 # binaries
 __pycache__
+dist
+*.egg-info
 
 # sensitive files
 .env
