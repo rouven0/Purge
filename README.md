@@ -21,7 +21,7 @@ DISCORD_BOT_TOKEN
 ```
 
 ### Registering commands
-To register commands, simply run `python3 purge/__init__.py --deploy` after cloning the repo and installing all requirements (If you are on nix, this can be achieved via `nix develop`).
+To register commands, simply run `python3 purge/__init__.py --deploy` after cloning the repo and installing all requirements.
 The following environment variables are required to be set before executing the command:
 ```env
 DISCORD_CLIENT_ID
