@@ -9,5 +9,5 @@ dependencies = [
     "gunicorn>=26.0.0",
     "python-i18n[yaml]>=0.3.9",
     "ruff>=0.15.21",
-    "ty>=0.0.59",
+    "ty>=0.0.61",
 ]
