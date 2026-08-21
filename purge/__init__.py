@@ -6,7 +6,7 @@ from time import time
 
 import i18n
 import requests
-from flask import Flask, send_file
+from flask import Flask
 from flask_discord_interactions import DiscordInteractions
 from flask_discord_interactions.models.message import Message
 from flask_discord_interactions.models.option import CommandOptionType, Option
@@ -36,11 +36,6 @@ for locale in config.I18n.AVAILABLE_LOCALES:
     i18n.t("ratelimited", locale=locale)
 
 app = Flask(__name__)
-
-
-@app.route("/robots.txt")
-def get_robots():
-    return send_file(f"{config.BASE_PATH}/robots.txt")
 
 
 @app.route("/health")
